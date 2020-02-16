@@ -9,6 +9,8 @@ class MemeGenerator extends Component {
             randomImg: "http://i.imgflip.com/1bij.jpg",
             allMemeImgs: []
         }
+
+        this.handleChange = this.handleChange.bind(this)
     }
 
     //We will be using an APi that provide a bunch of meme images
@@ -22,9 +24,32 @@ class MemeGenerator extends Component {
             })
     }
 
+    //onchange handler to update state
+    handleChange(event) {
+        console.log("working!")
+        const { name, value } = event.target
+        this.setState({ [name]: value })
+    }
+
     render() {
         return (
-            <h1>Meme Generator Section</h1>
+            <div>
+
+                <form className="meme-form">
+                    <input type="text" name="topText" placeholder="Top Text" value={this.state.topText} onChange={this.handleChange} /> <br />
+                    <input type="text" name="bottomText" placeholder="Bottom text" value={this.state.bottomText} onChange={this.handleChange} /> <br /> <br />
+
+                    <button>Generate</button> <br /> <br />
+
+                </form>
+
+                <div className="meme">
+                    <img src={this.state.randomImg} alt="" />
+                    <h2 className="top">{this.state.topText}</h2>
+                    <h2 className="bottom">{this.state.bottomText}</h2>
+                </div>
+            </div>
+
         )
     }
 }
