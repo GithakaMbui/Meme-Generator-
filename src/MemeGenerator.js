@@ -11,6 +11,7 @@ class MemeGenerator extends Component {
         }
 
         this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     //We will be using an APi that provide a bunch of meme images
@@ -31,11 +32,23 @@ class MemeGenerator extends Component {
         this.setState({ [name]: value })
     }
 
+    handleSubmit(event) {
+        event.preventDefault()
+        //get a rabdom image (index in the array)
+        //get a meme from that index
+        //set a random to the url of the item I grabbed
+        const randNum = Math.floor(Math.random() * this.state.allMemeImgs.length)
+        const randMemeImg = this.state.allMemeImgs[randNum].url
+        this.setState({ randomImg: randMemeImg })
+
+
+    }
+
     render() {
         return (
             <div>
 
-                <form className="meme-form">
+                <form className="meme-form" onSubmit={this.handleSubmit}>
                     <input type="text" name="topText" placeholder="Top Text" value={this.state.topText} onChange={this.handleChange} /> <br />
                     <input type="text" name="bottomText" placeholder="Bottom text" value={this.state.bottomText} onChange={this.handleChange} /> <br /> <br />
 
